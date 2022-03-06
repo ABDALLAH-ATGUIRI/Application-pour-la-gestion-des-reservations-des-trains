@@ -1,0 +1,77 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+
+}
+body{
+    background: rgb(192, 253, 253);
+}
+// .row{
+//     background-color: white;
+//     border-radius: 30px;
+//     box-shadow: 12px 12px 22px gray;
+   
+// }
+img{
+    border-top-left-radius: 30px ;
+    border-bottom-left-radius: 30px ;
+    
+    
+}
+.img-fluid{
+    height: 70vh;
+    
+    padding-left: 0;
+
+}
+.btn1{
+   border: none;
+   outline: none;
+   height: 50px;
+   width: 30%;
+    margin-left: 35%;
+  
+   color: white;
+   font-weight: bold;
+   background-color: black;
+
+}
+.btn1:hover{
+   background-color: white;
+   border : 1px solid;
+   color: black;
+}
+.con-4 {
+    background-image: url(../img/illustration-cartes-1.png);
+    background-position: right;
+    background-color: #d8d8d8;
+    border-radius: 10px; 
+    display: flex;
+     -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+.hh{
+  width: 80%;
+}
+
+
+@media screen and (max-width: 850px){
+  .pro{
+    width: 100%;
+  }
+  
+}
+
+
+
+
+
+
