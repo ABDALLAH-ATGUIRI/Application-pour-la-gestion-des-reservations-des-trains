@@ -45,7 +45,7 @@ require_once '/xampp/htdocs/only_train/view/admin/admin_page.php';
         </div>
         <div class="form-group">
           <label for="date">date</label>
-          <input type="date" name="date" class="form-control" required>
+          <input type="datetime-local" name="date" class="form-control" required>
         </div>
 
         <div class="form-group mt-3">

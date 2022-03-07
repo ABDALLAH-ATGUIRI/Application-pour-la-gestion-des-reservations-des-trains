@@ -41,11 +41,11 @@ require_once '/xampp/htdocs/only_train/view/admin/admin_page.php';
               </div>
               <div class="form-group">
                 <label for="train">Train</label>
-                <input type="text" value="<?= $voyage['Id_train'] ?>" name="train" class="form-control">
+                <input type="text" value="<?= $voyage['train'] ?>" name="train" class="form-control">
               </div>
               <div class="form-group">
                 <label for="date">date</label>
-                <input type="date" value="<?= $voyage['date'] ?>" name="date" class="form-control">
+                <input type="datetime-local" value="<?= $voyage['date'] ?>" name="date" class="form-control">
               </div>
               <input type="hidden" name="id" value="<?= $voyage['Id_voyage'] ?>">
               <div class="form-group mt-3">

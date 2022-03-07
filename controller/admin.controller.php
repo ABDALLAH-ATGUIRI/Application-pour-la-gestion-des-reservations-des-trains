@@ -51,7 +51,7 @@ class Voyage
 
 
         $data = array(
-            "N_train" => $_POST["N_train"],
+            "train" => $_POST["train"],
             "dep_train"  => $_POST["dep_train"],
             "arr_train" => $_POST["arr_train"],
             "date_train" => $_POST["date_train"],
