@@ -1,0 +1,147 @@
+* {
+    font-family: 'Poppins' sans-serif;
+    // font-family: montserrat;
+  }
+  .navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    /* position: static; */
+    padding: 0 2% 0 2%;
+  }
+  .dropdown{
+    padding: 0;
+     left: 10%;
+      min-width: 335px;
+       margin-top: 8%;
+       text-align: center;
+       font-weight: bold;
+  }
+  .btn-stl{
+    text-align: end;
+    margin-top: 10%;
+  }
+  .section-padding {
+    padding: 100px 0;
+  }
+  .carousel-item img {
+    height: 100vh;
+    min-height: 300px;
+  }
+  .carousel-caption {
+    bottom: 220px;
+    z-index: 2;
+  }
+  .carousel-caption h5 {
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+  }
+  .carousel-caption p {
+    width: 60%;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.9;
+  }
+  .carousel-inner::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+
+  }
+
+  #logo {
+  width: 60%;
+  margin-top: 15px;
+  }
+
+
+
+  #form {
+    background-color: #000;
+    height: 400px;
+    width: 800px;
+    margin: auto;
+    margin-top: 100px;
+    opacity: 0.7;
+  }
+  #first-group {
+    border: none;
+    width: 400px;
+    margin-top: 38px;
+    position: absolute;
+  }
+  #content {
+    width: 100%;
+    display: flex;
+    padding: 2%;
+    justify-content: space-evenly;
+  }
+  #content #input-group {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 8px;
+    width: 100%;
+    color: #fff;
+  }
+  ::placeholder {
+    color: #fff;
+  }
+  .fa {
+    display: inline-block;
+    color: red;
+    border-right: 1px solid #fff;
+    padding: 8px;
+    margin-left: 8px;
+  }
+  #second-group {
+    border: none;
+    width: 400px;
+    margin-top: 55px;
+    margin-left: 400px;
+  }
+  #submit-btn {
+    margin-top: 30px;
+    margin-left: 600px;
+    background: transparent;
+    color: #fff;
+    width: 150px;
+    border: 1px solid red;
+    outline: none;
+    padding: 10px;
+    font-size: 20px;
+  }
+  .frn {
+    display: flex;
+  }
+
+  .qsqs{
+    min-width: 350px;
+    background-color: #181818;
+    padding: 10%;
+  }
+  .nav-link{
+    color: #000;
+    font-size: 18px ;
+    font-weight: bold;
+  }
+
+
+  @media screen and (max-width: 995px)
+  {
+    .dropdown{
+       left: 0;
+        min-width: 100%;
+    }
+  }
+ 
+
+
+
