@@ -1,17 +1,9 @@
 <?php
 
 require __DIR__ . '/../Model/client.model.php';
-// session_start();
 
 class userController
 {
-
-    // public function __construct()
-    // {
-    //     session_start();
-    // }
-
-
     public function signup()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -95,7 +87,6 @@ class userController
 
     public function reservation()
     {
-
         $id = $_POST['id'];
         $view_data = Clients::reserve_voyage($id);
         View::load('user/reservation', $view_data);
@@ -117,13 +108,14 @@ class userController
                 $id = Clients::get_user();
 
                 $data['Id_user'] = $id[0];
-
-
             endif;
-            Clients::client_reserve($data);
+            $retur = Clients::client_reserve($data);
+            if ($retur == true) {
+                header('location:http://onlytrain.local');
+            }
 
 
-            // var_dump($data);
+            // var_dump($data);  
 
         }
     }
@@ -151,14 +143,12 @@ class userController
     static public function Annuler()
     {
         $time =  strtotime($_POST['date_dep']) - strtotime('now') + 60 * 60;
-        if ($time > 1) 
-        {
+        if ($time > 1) {
             $data['Id_client'] = $_SESSION['Id_client'];
             $data['Id_reserv'] = $_POST['Id_reserv'];
             Clients::Annuler($data);
             header('location:http://onlytrain.local/user/profile');
-        }
-         else {
+        } else {
             echo '  <script>
                         alert("Vous ne pouvez pas effectuer cette opération");  
                     </script>';

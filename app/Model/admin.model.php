@@ -58,7 +58,6 @@ class Admin
             header('location:http://onlytrain.local/admin/dashboard');
     }
 
-
     static public function getVoyages()
     {
 
@@ -67,7 +66,6 @@ class Admin
         $data = $db->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
-
 
     static public function getOneVoyage($id)
     {
@@ -121,9 +119,4 @@ class Admin
 
     }
 
-    static public function trainPlace()
-    {
-        $db = Database::connect()->prepare("UPDATE voyage INNER JOIN train SET Annuler = 1 WHERE Id_tarin = Id_train AND nb_palces <= (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage =48) ");
-
-    }
 }

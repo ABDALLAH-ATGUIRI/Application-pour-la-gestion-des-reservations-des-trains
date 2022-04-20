@@ -3,16 +3,15 @@ require __DIR__ . '/../Model/admin.model.php';
 
 class adminController
 {
+    
     public function __construct()
     {
     }
-
 
     public function index()
     {
         View::load('admin/index');
     }
-
 
     public function addVoyage()
     {
@@ -68,7 +67,6 @@ class adminController
         }
     }
 
-
     public function logoutAdmin()
     {
 
@@ -77,8 +75,6 @@ class adminController
         $_SESSION[] = NULL;
         View::load('admin/index');
     }
-
-
 
     public function dashboard()
     {
@@ -130,7 +126,6 @@ class adminController
         }
     }
 
-
     public function addTrain()
     {
 
@@ -149,8 +144,6 @@ class adminController
         }
     }
 
-
-
     public function trains()
     {
 
@@ -164,8 +157,6 @@ class adminController
         $view_data = Admin::getAllClients();
         View::load('admin/Clients', $view_data);
     }
-
-
 
     public function Travelers()
     {

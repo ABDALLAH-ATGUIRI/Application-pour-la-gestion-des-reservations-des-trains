@@ -60,11 +60,10 @@ class Clients
         return $db->fetchAll();
     }
 
-
     static public function searchVoyage($data)
     {
 
-        $db = Database::connect()->prepare("SELECT * FROM voyage WHERE depart = :depart AND arrive = :arrive AND CAST(date_dep AS DATE) = :date_dep AND Annuler = 0  ");
+        $db = Database::connect()->prepare("SELECT * FROM voyage WHERE depart = :depart AND arrive = :arrive AND CAST(date_dep AS DATE) = :date_dep AND Annuler = 0 AND date_dep > CURRENT_TIMESTAMP ");
         $db->bindParam(':depart', $data['depart']);
         $db->bindParam(':arrive', $data['arrive']);
         $db->bindParam(':date_dep', $data['date_dep']);
@@ -84,16 +83,15 @@ class Clients
     static public function client_reserve($data)
     {
 
-
         $db = Database::connect()->prepare("INSERT INTO `reservation`(`Id_voyage`, `client` , `user`) VALUES (:Id_voyage,:Id_client,:Id_user)");
+
         $db->bindParam(':Id_client', $data['Id_client']);
         $db->bindParam(':Id_voyage', $data['Id_voyage']);
         $db->bindParam(':Id_user', $data['Id_user']);
-
-
-
-        $db->execute();
-        header('location:http://onlytrain.local');
+        if($db->execute())
+        {
+             return true ;
+        }
     }
 
     static public function user_reserve($data)
@@ -142,7 +140,6 @@ class Clients
         return $data;
     }
 
-
     static public function Annuler($data)
     {
 
@@ -155,5 +152,27 @@ class Clients
             // echo '<script>alert("Votre vol a été annulé")</script>';
         }
         
+    }
+
+    static public function trainPlace($id_voyage)
+    {
+        $db = Database::connect()->prepare("UPDATE voyage SET Annuler = 1 WHERE Annuler = 0 AND (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage = '$id_voyage' ) > (SELECT nb_places FROM voyage INNER JOIN train WHERE Id_voyage = '$id_voyage' AND voyage.Id_train = train.Id_train)");
+        if ($db->execute()) 
+        {
+            $Annuler = self::check($id_voyage);
+            return $Annuler ;
+        }
+    }
+
+    public function check($id_voyage)
+    {
+        $db = Database::connect()->prepare(" SELECT Annuler FROM voyage WHERE Id_voyage = $id_voyage ");
+        $db->execute();
+        $data = $db->fetch(PDO::FETCH_NUM);
+
+        if($data === 1)
+        {
+            return true ; 
+        }
     }
 }

@@ -25,9 +25,9 @@ $search = userController::search();
                         endforeach; ?>
                     </select>
                 </div>
+
                 <div class="mb-3 frn">
                     <i class="fa fa-location-arrow" aria-hidden="true"></i>
-
                     <select class="form-select form-control " id="" name="gare_arr" id="exampleSelect1" required>
                         <option value="">Ma gare d'arrivée</option>
                         <?php foreach ($search['arrive'] as $data) :
@@ -37,11 +37,13 @@ $search = userController::search();
                         endforeach; ?>
                     </select>
                 </div>
+
                 <div class="mb-3 frn">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
 
-                    <input type="date" class="form-control" name='date' placeholder="Ma date de départ" required />
+                    <input type="date" id="date" class="form-control" name='date' placeholder="Ma date de départ" required />
                 </div>
+
                 <div class="btn-stl">
                     <button type="submit" name="search" class="btn btn-success ">RECHERCHÉ</button>
                 </div>
@@ -54,3 +56,20 @@ $search = userController::search();
     <!-- </div> -->
 
 </section>
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("date").setAttribute("min", today);
+</script>
