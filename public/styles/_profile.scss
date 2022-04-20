@@ -68,6 +68,9 @@ main {
 .btn-toggle[aria-expanded="true"]::before {
   transform: rotate(90deg);
 }
+#page-content-wrapper{
+  overflow-y: scroll;
+}
 
 .btn-toggle-nav a {
   display: inline-flex;

@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../inc/header.php';
-// require_once __DIR__.'/../inc/navbar.php';
 ?>
 <section>
     <div class="signup-form">
@@ -10,7 +9,13 @@ require_once __DIR__ . '/../inc/header.php';
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="username" placeholder="Mon nom " required="required">
+                    <input type="text" class="form-control" name="username" placeholder="Mon prènom " required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" name="lastname" placeholder="Mon nom " required="required">
                 </div>
             </div>
             <div class="form-group">
@@ -52,6 +57,7 @@ require_once __DIR__ . '/../inc/header.php';
         <div class="text-center">Already have an account? <a href="/">Login here</a>.</div>
     </div>
 </section>
+
 <?php
 require_once __DIR__ . '/../inc/footer.php';
 ?>

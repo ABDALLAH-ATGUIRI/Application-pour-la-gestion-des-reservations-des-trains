@@ -1,72 +1,47 @@
 <?php
-
-require_once __DIR__.'/../inc/header.php';
-require_once __DIR__.'/../admin/admin_page.php';
-require_once __DIR__.'/../../Controller/AdminController.php';
-
-
-$data = new AdminController();
-$view_data = $data->getAllVoyages();
-// var_dump($view_data);
+if (!isset($_SESSION['email'])) :
+    require_once __DIR__ . '/../inc/header.php';
 ?>
 
+    <div class="list-group list-group-flush w-100">
+
+        <div class="list-group list-group-flush login-form  w-100">
+            <div class="row gutters-lg">
+                <div class="col-md-4 mb-3 w-100">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-10 mx-auto p-4 border mb-5">
+                                <div class="row about-list w-50">
+                                    <form action="http://onlytrain.local/admin/login" method="post">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150" />
 
-            <h3 class="alert alert-success text-center"></h3>
+                                        <h4 class="modal-title">Login to Your Account</h4>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="email" placeholder="Username" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                                        </div>
+                                        <div class="form-group small clearfix">
 
-            <h3 class="alert alert-danger text-center"></h3>
+                                            <a href="#" class="forgot-link">Forgot Password?</a>
+                                        </div>
+                                        <input type="submit" name="loginAdmin" class="btn btn-primary btn-block btn-lg" value="Login">
+                                    </form>
+                                </div>
 
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Gare de départ</th>
-                        <th scope="col">Gare d'arrivée</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Date de départ</th>
-                        <th scope="col">Date d'arrivée</th>
-                        <th scope="col">Train</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Annuler</th>
-                    </tr>
-                </thead>
-                <tbody>
+                            </div>
 
-                <?php
-                // var_dump($view_data);
-                foreach ($view_data as $voyage) : ?>
-                    <tr>
-                        <td class="text-center"> <?= $voyage['Id_voyage'] ?> </td> 
-                        <td class="text-center"> <?= $voyage['depart'] ?> </td>
-                        <td class="text-center"> <?= $voyage['arrive'] ?></td>
-                        <td class="text-center"><b class="float-right"> <?= $voyage['price'] ?> DH </b></td>
-                        <td class="text-center"> <?= $voyage['date_arr'] ?> </td>
-                        <td class="text-center"> <?= $voyage['date_dep'] ?> </td>
-                        <td class="text-center"> <?= $voyage['nom_train'] ?> </td>
-                        <td></td>
-                        <td>
-                            <form method="post" action="http://onlytrain.local/admin/editVoyage">
-                                <input type="hidden" name="Id_voyage" value="<?= $voyage['Id_voyage'] ?>">
-                                <input type="submit" name="edit-submit" class="btn btn-info" value="Edit">
-                            </form>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-danger">Annuler</a>
-                        </td>
-                    </tr>
-                    <?php endforeach ?>
-
-                </tbody>
-            </table>
-
-
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<?php
-require_once __DIR__.'/../inc/footer.php';
-?>
+    <?php
+    require_once __DIR__ . '/../inc/footer.php';
+else :
+    header('http://onlytrain.local/admin/dashboard');
+endif;
+    ?>

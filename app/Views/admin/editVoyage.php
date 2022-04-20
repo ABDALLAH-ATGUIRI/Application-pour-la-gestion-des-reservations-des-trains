@@ -1,10 +1,5 @@
   <?php
-
-  require_once __DIR__ . '/../inc/header.php';
   require_once __DIR__ . '/../admin/admin_page.php';
-  require_once __DIR__ . '/../../Controller/AdminController.php';
-  $data = new AdminController();
-  $data = $data->Trains();
   ?>
 
   <div class="container">
@@ -34,11 +29,11 @@
             <label for="train">Train</label>
             <!-- <input type="text" value="<= $view_data['Id_train'] ?>" name="train" class="form-control"> -->
             <select class="form-select " name="train" id="exampleSelect1">
-            <?php 
-            foreach ($data as $train) : ?>
-              <option value="<?= $train['Id_train']; ?>"><?= $train['nom_train']; ?></option>
-            <?php endforeach; ?>
-          </select>
+              <?php
+              foreach ($view_data['trains'] as $train) : ?>
+                <option value="<?= $train['Id_train']; ?>"><?= $train['nom_train']; ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="date">date de départ</label>

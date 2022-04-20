@@ -1,11 +1,11 @@
 <?php
 
-require __DIR__.'/../db/database.php';
-class Voyages
+require __DIR__ . '/../db/database.php';
+class Admin
 {
-     public function addVoyage($data)
+    public function addVoyage($data)
     {
-        
+
         $db = Database::connect()->prepare("INSERT INTO voyage (date_dep,date_arr,depart,arrive,Id_train,price)
                                             VALUES(:date_dep,:date_arr,:depart,:arrive,:train,:price)");
         $db->bindParam(':date_dep', $data['date_dep']);
@@ -15,10 +15,25 @@ class Voyages
         $db->bindParam(':train', $data['train']);
         $db->bindParam(':price', $data['price']);
         $db->execute();
-        
-        View::load('admin/index');
+        return true ;
+
     }
 
+    static public function get_admin($data)
+    {
+
+        try {
+
+            $db = Database::connect()->prepare("SELECT * FROM admin WHERE email = '$data[email]' AND password = '$data[pass]' ");
+
+            $db->execute();
+            if ($db->fetch(PDO::FETCH_OBJ))
+                return 1;
+            return 0;
+        } catch (PDOException $e) {
+            return 'error' . $e->getMessage();
+        }
+    }
 
     static public function editVoyage($data)
     {
@@ -32,31 +47,35 @@ class Voyages
         $db->bindParam(':price', $data['price']);
         $db->bindParam(':Id_train', $data['train']);
 
-        $db->execute();
-        header('location:http://onlytrain.local');
+        if ($db->execute())
+            header('location:http://onlytrain.local/admin/dashboard');
+    }
+
+    static public function annulerVoyage($id)
+    {
+        $db = Database::connect()->prepare("UPDATE voyage SET Annuler = 1 WHERE Id_voyage = $id ");
+        if ($db->execute())
+            header('location:http://onlytrain.local/admin/dashboard');
     }
 
 
     static public function getVoyages()
     {
-       
-        $db = Database::connect()->prepare("SELECT * FROM voyage INNER JOIN train ON voyage.Id_train = train.Id_train");
+
+        $db = Database::connect()->prepare("SELECT * FROM voyage INNER JOIN train ON voyage.Id_train = train.Id_train WHERE Annuler = 0");
         $db->execute();
         $data = $db->fetchAll(PDO::FETCH_ASSOC);
         return $data;
-
-
     }
 
 
     static public function getOneVoyage($id)
     {
-        
+
         $db = Database::connect()->prepare("SELECT * from voyage where Id_voyage = :Id");
         $db->execute(array(':Id' => $id));
         $data = $db->fetch(PDO::FETCH_ASSOC);
         return $data;
-        
     }
 
     static public function addTrain($data)
@@ -76,5 +95,35 @@ class Voyages
         $db = Database::connect()->prepare("SELECT * FROM train");
         $db->execute();
         return $db->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    static public function getAllClients()
+    {
+        $db = Database::connect()->prepare("SELECT `email`, `n_phone`, `f_name`, `Id_client`, `l_name` FROM `client`");
+        $db->execute();
+        $data = $db->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    static public function getTravelersUser($voyage)
+    {
+        $db = Database::connect()->prepare("SELECT `Id_user`,`email`, `n_phone`, `f_name`, `l_name` FROM `reservation` as r, user as u where r.Id_voyage LIKE $voyage and r.user like u.Id_user");
+        $db->execute();
+        $data = $db->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    static public function getTravelersClient($voyage)
+    {
+        $db = Database::connect()->prepare("SELECT Id_client , `email`, `n_phone`, `f_name`, `l_name` FROM `reservation` as r, client as c where r.Id_voyage LIKE $voyage and r.client like c.Id_client");
+        $db->execute();
+        $data = $db->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+
+    }
+
+    static public function trainPlace()
+    {
+        $db = Database::connect()->prepare("UPDATE voyage INNER JOIN train SET Annuler = 1 WHERE Id_tarin = Id_train AND nb_palces <= (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage =48) ");
+
     }
 }

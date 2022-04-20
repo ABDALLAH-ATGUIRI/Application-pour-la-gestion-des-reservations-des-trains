@@ -1,11 +1,6 @@
 <?php
-echo 'hello';
-
 require_once __DIR__ . '/../inc/header.php';
 require_once __DIR__ . '/../admin/admin_page.php';
-require_once __DIR__ . '/../../Controller/AdminController.php';
-// $acc = new adminController();
-// $acc->addTrain();
 ?>
 
 <div class="container">

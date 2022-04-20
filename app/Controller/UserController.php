@@ -1,8 +1,15 @@
 <?php
+
 require __DIR__ . '/../Model/client.model.php';
+// session_start();
 
 class userController
 {
+
+    // public function __construct()
+    // {
+    //     session_start();
+    // }
 
 
     public function signup()
@@ -10,6 +17,7 @@ class userController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = array(
                 'f_name' => $_POST['username'],
+                'l_name' => $_POST['lastname'],
                 'n_phone' => $_POST['phone'],
                 'password' => password_hash($_POST['Password'], PASSWORD_BCRYPT),
                 'email' => $_POST['email']
@@ -22,35 +30,32 @@ class userController
 
     public function login()
     {
-        
+
         if (isset($_POST["login"])) {
-
             $email = $_POST['email'];
-
-            
             $result = Clients::get_client($email);
-           
-            if ($result['email'] === $_POST['email'] && password_verify($_POST['password'], $result['password']))  {
 
-                if (!isset($_SESSION)) {
-                    session_start();
-                    $_SESSION['Id_client'] = $result['Id_client'];
-                    
-                    return View::load('home', $result);
-                    // header('location:http://onlytrain.local');
-                }
-
-                
+            if (!empty($result)   && password_verify($_POST['password'], $result['password']) == 1) {
+                // $_SESSION['Id_client'] = $result['Id_client'];
+                $_SESSION['user'] = $result;
+                $this->afterLogin($_SESSION);
+                View::load('home', $_SESSION['user']);
             } else {
-                // header('location:http://onlytrain.local');
-                // echo "<h6 class=''>The info that you've entered is incorrect.</h6>";
+                View::load('home');
             }
         }
     }
 
-    public function logout()
+    public function afterLogin($result)
     {
-        session_start();
+
+        $_SESSION['Id_client'] = $result['user']['Id_client'];
+        $_SESSION['user'] = $result['user'];
+        View::load('home', $result);
+    }
+
+    static public function logoutClient()
+    {
         session_unset();
         session_destroy();
         $_SESSION = NULL;
@@ -59,26 +64,106 @@ class userController
 
     public function getVoyage()
     {
-        if (isset($_POST['search'])) {
-            $data = array(
-                'depart' => $_POST['gare_dep'],
-                'arrive' => $_POST['gare_arr'],
-                'date_dep' => $_POST['date']
-            );
-            $view_data = Clients::searchVoyage($data);
-            return $view_data;
-        }
+
+        $data = array(
+            'depart' => $_POST['gare_dep'],
+            'arrive' => $_POST['gare_arr'],
+            'date_dep' => $_POST['date']
+
+        );
+        $view_data['trip'] = Clients::searchVoyage($data);
+        View::load('home', $view_data);
     }
-    public function search()
+
+    static public function search()
     {
         $view_data['depart'] = Clients::get_depart_Voyage();
         $view_data['arrive'] = Clients::get_arrive_Voyage();
-
+        // View::load('home', $view_data);
         return $view_data;
     }
+
     public function profile()
     {
-        View::load('user/profile');
+
+        $id = $_SESSION['Id_client'];
+
+        $view_data = Clients::getVoyages($id);
+        // return $view_data;
+        View::load('user/profile', $view_data);
+    }
+
+    public function reservation()
+    {
+
+        $id = $_POST['id'];
+        $view_data = Clients::reserve_voyage($id);
+        View::load('user/reservation', $view_data);
+    }
+
+    public function reserve()
+    {
+        if (isset($_POST['select'])) {
+
+            $data['Id_voyage'] = $_POST['Id_voyage'];
+
+            if (isset($_SESSION['user'])) :
+
+                $data['Id_client'] = $_SESSION['Id_client'];
+
+            else :
+
+                $this->user();
+                $id = Clients::get_user();
+
+                $data['Id_user'] = $id[0];
+
+
+            endif;
+            Clients::client_reserve($data);
+
+
+            // var_dump($data);
+
+        }
+    }
+
+    public function user()
+    {
+        $data = array(
+            'f_name_user' => $_POST['f_name_user'],
+            'l_name_user' => $_POST['l_name_user'],
+            'email_user' => $_POST['email_user'],
+            'phone_user' => $_POST['phone_user'],
+        );
+
+        Clients::user_reserve($data);
+    }
+
+    static public function getMyVoyage()
+    {
+
+        $id = $_SESSION['Id_client'];
+        $data = Clients::myVoyages($id);
+        return $data;
+    }
+
+    static public function Annuler()
+    {
+        $time =  strtotime($_POST['date_dep']) - strtotime('now') + 60 * 60;
+        if ($time > 1) 
+        {
+            $data['Id_client'] = $_SESSION['Id_client'];
+            $data['Id_reserv'] = $_POST['Id_reserv'];
+            Clients::Annuler($data);
+            header('location:http://onlytrain.local/user/profile');
+        }
+         else {
+            echo '  <script>
+                        alert("Vous ne pouvez pas effectuer cette opération");  
+                    </script>';
+            header('location:http://onlytrain.local/user/profile');
+        }
     }
 }
 //  $bro=new Client::cree_compte($data);

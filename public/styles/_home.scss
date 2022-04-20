@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 * {
-    font-family: 'Poppins' sans-serif;
-    // font-family: montserrat;
-  }
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box
+}
+
+body {
+    background-color: #dadde6;
+    font-family: arial
+}
   .navbar{
-    position: fixed;
+    // position: fixed;
     width: 100%;
     z-index: 100;
     /* position: static; */
@@ -11,11 +19,15 @@
   }
   .dropdown{
     padding: 0;
-     left: 10%;
+    //  left: 10%;
       min-width: 335px;
        margin-top: 8%;
-       text-align: center;
+       text-align: center !important;
        font-weight: bold;
+  }
+  .dropdown-menu
+  {
+    text-align: center ;
   }
   .btn-stl{
     text-align: end;
@@ -60,7 +72,6 @@
   width: 60%;
   margin-top: 15px;
   }
-
 
 
   #form {
