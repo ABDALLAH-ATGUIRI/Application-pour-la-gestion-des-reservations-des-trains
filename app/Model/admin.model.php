@@ -110,6 +110,7 @@ class Admin
         $data = $db->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+    
     static public function getTravelersClient($voyage)
     {
         $db = Database::connect()->prepare("SELECT Id_client , `email`, `n_phone`, `f_name`, `l_name` FROM `reservation` as r, client as c where r.Id_voyage LIKE $voyage and r.client like c.Id_client");

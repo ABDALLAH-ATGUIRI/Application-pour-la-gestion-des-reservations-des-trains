@@ -4,26 +4,33 @@ require __DIR__ . '/../Model/client.model.php';
 
 class userController
 {
+
     public function signup()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = array(
-                'f_name' => $_POST['username'],
-                'l_name' => $_POST['lastname'],
-                'n_phone' => $_POST['phone'],
-                'password' => password_hash($_POST['Password'], PASSWORD_BCRYPT),
-                'email' => $_POST['email']
-            );
-            Clients::addClient($data);
-        } else {
+            if ($_POST['Password'] === $_POST['confirm_password']) {
+                $data = array(
+                    'f_name' => $_POST['username'],
+                    'l_name' => $_POST['lastname'],
+                    'n_phone' => $_POST['phone'],
+                    'password' => password_hash($_POST['Password'], PASSWORD_BCRYPT),
+                    'email' => $_POST['email']
+                );
+                Clients::addClient($data);
+            } else {
+                echo '<script>alert("Confirmer le mot de passe incorrect , Réessayer !!!");
+                        history.back()
+                </script>';
+                
+            }
+        }else{
             View::load('user/signup');
         }
     }
 
     public function login()
     {
-
-        if (isset($_POST["login"])) {
+         if (isset($_POST["login"])) {
             $email = $_POST['email'];
             $result = Clients::get_client($email);
 
@@ -50,7 +57,7 @@ class userController
     {
         session_unset();
         session_destroy();
-        $_SESSION = NULL;
+        $_SESSION[] = NULL;
         header('location:http://onlytrain.local');
     }
 
@@ -111,6 +118,7 @@ class userController
             endif;
             $retur = Clients::client_reserve($data);
             if ($retur == true) {
+                Clients::trainPlace($data['Id_voyage']);
                 header('location:http://onlytrain.local');
             }
 
@@ -142,18 +150,22 @@ class userController
 
     static public function Annuler()
     {
-        $time =  strtotime($_POST['date_dep']) - strtotime('now') + 60 * 60;
-        if ($time > 1) {
+        $time =  strtotime($_POST['date_dep']) - strtotime('now')+60*60;
+        echo date('h:i',$time);
+        if ($time > '1:00' ) {
             $data['Id_client'] = $_SESSION['Id_client'];
             $data['Id_reserv'] = $_POST['Id_reserv'];
+            $data['Id_voyage'] = $_POST['Id_voyage'];
             Clients::Annuler($data);
             header('location:http://onlytrain.local/user/profile');
         } else {
-            echo '  <script>
-                        alert("Vous ne pouvez pas effectuer cette opération");  
-                    </script>';
-            header('location:http://onlytrain.local/user/profile');
+            echo '<script>
+                        alert("Vous ne pouvez pas effectuer cette opération"); 
+                        history.back(); 
+                  </script>';
+            
         }
     }
+    
 }
 //  $bro=new Client::cree_compte($data);

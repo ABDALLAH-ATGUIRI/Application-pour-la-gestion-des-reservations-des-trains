@@ -9,31 +9,31 @@ require_once __DIR__ . '/../inc/header.php';
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="username" placeholder="Mon prènom " required="required">
+                    <input type="text" class="form-control" name="username" placeholder="Prènom " required="required">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="lastname" placeholder="Mon nom " required="required">
+                    <input type="text" class="form-control" name="lastname" placeholder="Nom " required="required">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                    <input type="email" class="form-control" name="email" placeholder="Mon e-m@il " required="required">
+                    <input type="email" class="form-control" name="email" placeholder="E-m@il " required="required">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                    <input type="number" class="form-control" name="phone" placeholder="Mon téléphone " required="required">
+                    <input type="number" class="form-control" name="phone" placeholder="Téléphone " required="required">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control" name="Password" placeholder="Mon mot de passe " required="required">
+                    <input type="password" class="form-control" name="Password" placeholder="Mot de passe " required="required">
                 </div>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@ require_once __DIR__ . '/../inc/header.php';
                         <i class="fa fa-lock"></i>
                         <i class="fa fa-check"></i>
                     </span>
-                    <input type="password" class="form-control" name="confirm_password" placeholder="Je confirme mon mot de passe " >
+                    <input type="password" class="form-control" name="confirm_password" placeholder="Conformer mot de passe " >
                 </div>
             </div>
             <div class="form-group">
@@ -57,6 +57,7 @@ require_once __DIR__ . '/../inc/header.php';
         <div class="text-center">Already have an account? <a href="/">Login here</a>.</div>
     </div>
 </section>
+
 
 <?php
 require_once __DIR__ . '/../inc/footer.php';

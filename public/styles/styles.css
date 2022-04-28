@@ -91,11 +91,12 @@
 }
 
 body {
-  background-color: #dadde6;
+  background-color: #f1f5ff;
   font-family: arial;
 }
 
 .navbar {
+  background-color: #f1f5ff;
   width: 100%;
   z-index: 100;
   /* position: static; */
@@ -154,8 +155,14 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(101, 119, 165, 0.2509803922);
   z-index: 1;
+}
+
+#backgoround {
+  background-image: url(../img/illustration-cartes-1.png);
+  background-clip: unset;
+  background-size: contain;
 }
 
 #logo {
@@ -239,8 +246,9 @@ body {
 }
 
 .qsqs {
+  border-radius: 8px;
   min-width: 350px;
-  background-color: #181818;
+  background-color: #ffffff;
   padding: 10%;
 }
 
@@ -248,6 +256,11 @@ body {
   color: #000;
   font-size: 18px;
   font-weight: bold;
+}
+
+.news {
+  height: 200px;
+  width: 200px;
 }
 
 @media screen and (max-width: 995px) {
@@ -602,7 +615,7 @@ h1 {
   display: block;
   width: 30px;
   height: 30px;
-  background-color: #DADDE6;
+  background-color: #f1f5ff;
   position: absolute;
   top: -15px;
   right: -15px;
@@ -707,7 +720,7 @@ h1 {
 }
 
 .row:last-child .card:last-child .card-cont button {
-  background-color: #009419;
+  background-color: #4aba70;
 }
 
 @media screen and (max-width: 860px) {

@@ -7,10 +7,11 @@
 }
 
 body {
-    background-color: #dadde6;
+    background-color: #f1f5ff;
     font-family: arial
 }
   .navbar{
+    background-color: #f1f5ff;
     // position: fixed;
     width: 100%;
     z-index: 100;
@@ -63,11 +64,15 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: #6577a540;
     z-index: 1;
 
   }
-
+#backgoround{
+  background-image: url(../img/illustration-cartes-1.png);
+  background-clip: unset;
+  background-size: contain;
+}
   #logo {
   width: 60%;
   margin-top: 15px;
@@ -134,8 +139,9 @@ body {
   }
 
   .qsqs{
+    border-radius: 8px;
     min-width: 350px;
-    background-color: #181818;
+    background-color: #ffffff;
     padding: 10%;
   }
   .nav-link{
@@ -143,7 +149,10 @@ body {
     font-size: 18px ;
     font-weight: bold;
   }
-
+  .news{
+    height: 200px;
+    width: 200px;
+  }
 
   @media screen and (max-width: 995px)
   {

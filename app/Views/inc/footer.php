@@ -34,7 +34,7 @@
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
                         <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
+                        <img src="../img/logo_onlytrain_new.png" alt="logo" id="logo" />
                         </h6>
                         <p>
                             Le site Onlytrain.com utilise des cookies afin de vous proposer la meilleure expérience et vous proposer des contenus adaptés à vos centres d'intérêts. En poursuivant votre navigation sur ce site, vous acceptez notre utilisation de cookies.Vous pouvez en savoir plus et modifier vos préférences en cliquant sur "Réglages".

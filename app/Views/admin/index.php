@@ -17,16 +17,14 @@ if (!isset($_SESSION['email'])) :
                                     <form action="http://onlytrain.local/admin/login" method="post">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150" />
 
-                                        <h4 class="modal-title">Login to Your Account</h4>
+                                        <h4 class="modal-title">Connectez-vous à votre compte</h4>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="email" placeholder="Username" required="required">
+                                            <input type="text" class="form-control" name="email" placeholder="Email" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                                            <input type="password" class="form-control" name="password" placeholder="mot de passe" required="required">
                                         </div>
                                         <div class="form-group small clearfix">
-
-                                            <a href="#" class="forgot-link">Forgot Password?</a>
                                         </div>
                                         <input type="submit" name="loginAdmin" class="btn btn-primary btn-block btn-lg" value="Login">
                                     </form>

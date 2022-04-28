@@ -88,9 +88,8 @@ class Clients
         $db->bindParam(':Id_client', $data['Id_client']);
         $db->bindParam(':Id_voyage', $data['Id_voyage']);
         $db->bindParam(':Id_user', $data['Id_user']);
-        if($db->execute())
-        {
-             return true ;
+        if ($db->execute()) {
+            return true;
         }
     }
 
@@ -133,7 +132,7 @@ class Clients
 
     static public function myVoyages($id)
     {
-        $db = Database::connect()->prepare("SELECT Id_voyage , Id_reserv FROM `reservation` WHERE client = $id AND anullation = 0");
+        $db = Database::connect()->prepare("SELECT Id_voyage , Id_reserv ,anullation FROM `reservation` WHERE client = $id");
         $db->execute();
         $data = $db->fetchAll(PDO::FETCH_NUM);
 
@@ -148,31 +147,27 @@ class Clients
         $db->bindParam(':Id_client', $data['Id_client']);
 
         if ($db->execute()) {
-            // var_dump($data);
-            // echo '<script>alert("Votre vol a été annulé")</script>';
+            self::check($data['Id_voyage']);
+            return true ;
         }
-        
     }
 
     static public function trainPlace($id_voyage)
     {
-        $db = Database::connect()->prepare("UPDATE voyage SET Annuler = 1 WHERE Annuler = 0 AND (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage = '$id_voyage' ) > (SELECT nb_places FROM voyage INNER JOIN train WHERE Id_voyage = '$id_voyage' AND voyage.Id_train = train.Id_train)");
-        if ($db->execute()) 
-        {
-            $Annuler = self::check($id_voyage);
-            return $Annuler ;
+        $db = Database::connect()->prepare("UPDATE voyage SET Annuler = 1 WHERE Id_voyage = '$id_voyage' AND (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage = '$id_voyage' AND anullation = 0 ) >= (SELECT nb_places FROM voyage INNER JOIN train WHERE Id_voyage = '$id_voyage' AND voyage.Id_train = train.Id_train)");
+        if ($db->execute()) {
+            return true;
         }
     }
 
-    public function check($id_voyage)
+    static public function check($id_voyage)
     {
-        $db = Database::connect()->prepare(" SELECT Annuler FROM voyage WHERE Id_voyage = $id_voyage ");
-        $db->execute();
-        $data = $db->fetch(PDO::FETCH_NUM);
-
-        if($data === 1)
-        {
-            return true ; 
+        $db = Database::connect()->prepare("UPDATE voyage SET Annuler = 0 WHERE Id_voyage = '$id_voyage' AND (SELECT COUNT(*) FROM `reservation` WHERE Id_voyage = '$id_voyage' AND anullation = 0 ) < (SELECT nb_places FROM voyage INNER JOIN train WHERE Id_voyage = '$id_voyage' AND voyage.Id_train = train.Id_train)");
+        
+        if ($db->execute()) {
+            return true;
         }
     }
+
+
 }

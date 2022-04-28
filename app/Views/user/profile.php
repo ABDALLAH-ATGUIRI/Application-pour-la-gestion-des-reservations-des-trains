@@ -73,9 +73,9 @@ $view_data = userController::getMyVoyage();
 
 
             <?php if (sizeof($view_data) > 0) :
-
                 foreach ($view_data as $value) :
                     $data = Clients::reserve_voyage($value[0]);
+                    
             ?>
 
 
@@ -154,13 +154,14 @@ $view_data = userController::getMyVoyage();
 
                                 </div>
 
-
+                                <?php if($value[2] == 0):?>
                                 <form action="/user/Annuler" method="POST">
                                     <input type="hidden" name="date_dep" value="<?= $data['date_dep']?>">
                                     <input type="hidden" name="Id_reserv" value="<?= $value[1] ?>">
+                                    <input type="hidden" name="Id_voyage" value="<?= $value[0] ?>">
                                     <button type="submit" class="btn-danger" title="View Details" data-toggle="tooltip">Annuler</button>
                                 </form>
-
+                                <?php endif ;?>
                             </section>
 
                         </article>

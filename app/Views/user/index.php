@@ -57,30 +57,22 @@
    <section class="container">
      <div class="row text-center pt-5 pb-5">
        <div class="col-lg-4">
-         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-           <title>Placeholder</title>
-           <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em"></text>
-         </svg>
-
+         <img class="news rounded-circle" src="../img/504367.jpg" alt="">
          <h2>Heading</h2>
          <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
          <p><a class="btn btn-danger" href="#">View details &raquo;</a></p>
        </div>
        <div class="col-lg-4">
-         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-           <title>Placeholder</title>
-           <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-         </svg>
+         <img class="news rounded-circle" src="../img/596297.jpg" alt="">
 
          <h2>Heading</h2>
          <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
          <p><a class="btn btn-danger" color="red" href="#">View details &raquo;</a></p>
        </div>
        <div class="col-lg-4">
-         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-           <title>Placeholder</title>
-           <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-         </svg>
+         <img class="news rounded-circle" src="../img/775631.jpg" alt="">
+
+
 
          <h2>Heading</h2>
          <p>And lastly this, the third column of representative placeholder content.</p>
@@ -90,7 +82,7 @@
 
      <hr class="featurette-divider">
 
-     <div class="row featurette pt-5 pb-5">
+     <div id="background" class="row  featurette pt-5 pb-5">
        <div class="col-md-6">
          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
          <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
